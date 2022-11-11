@@ -23,13 +23,14 @@ class _AnimationOneScreenState extends State<AnimationOneScreen> {
         appBar: AppAppBar(
           context: context,
           title: const Text(
-            "calendar",
+            "animation",
           ),
         ),
         body: Container(
           alignment: Alignment.center,
           child: const AnimationOne(
             width: 200,
+            renderPercentage: 0.6,
           ),
         ));
   }

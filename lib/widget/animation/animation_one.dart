@@ -7,10 +7,13 @@ class AnimationOne extends StatefulHookConsumerWidget {
   const AnimationOne({
     Key? key,
     required double width,
+    required double renderPercentage,
   })  : _width = width,
+        _renderPercentage = renderPercentage,
         super(key: key);
 
   final double _width;
+  final double _renderPercentage;
 
   @override
   ConsumerState<AnimationOne> createState() => _AnimationOneState();
@@ -19,11 +22,6 @@ class AnimationOne extends StatefulHookConsumerWidget {
 class _AnimationOneState extends ConsumerState<AnimationOne>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
-  late double _widthTween;
-  double _widthTweenEndValue = 0.0;
-  late final double _widthTweenBeginValue = widget._width;
-  int _todaySteps = 0;
-  final int _dailyStepsGoal = 100;
 
   @override
   void initState() {
@@ -33,16 +31,18 @@ class _AnimationOneState extends ConsumerState<AnimationOne>
       vsync: this,
     );
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _todaySteps = 20;
-      _setGraphPercentage();
       _animationController.forward(from: 0.0);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    _widthTween = useAnimation<double>(
-      Tween<double>(begin: _widthTweenBeginValue, end: _widthTweenEndValue)
+    final widthTween = useAnimation<double>(
+      Tween<double>(
+              begin: widget._width,
+              end: max(
+                  widget._width - (widget._width * widget._renderPercentage),
+                  0.0))
           .animate(
         CurvedAnimation(
           parent: _animationController,
@@ -77,7 +77,7 @@ class _AnimationOneState extends ConsumerState<AnimationOne>
           Align(
             alignment: Alignment.centerRight,
             child: Container(
-              width: _widthTween,
+              width: widthTween,
               height: height,
               color: Colors.white,
             ),
@@ -91,13 +91,5 @@ class _AnimationOneState extends ConsumerState<AnimationOne>
         ],
       ),
     );
-  }
-
-  void _setGraphPercentage() {
-    final percentage = _todaySteps / _dailyStepsGoal;
-    _widthTweenEndValue = percentage.isNaN
-        ? _widthTweenBeginValue
-        : max(
-            _widthTweenBeginValue - (_widthTweenBeginValue * percentage), 0.0);
   }
 }
