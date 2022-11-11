@@ -3,17 +3,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+const _defaultLeftColor = Color(0xff8BC84E);
+const _defaultRightColor = Color(0xff229BEC);
+
 class AnimationOne extends StatefulHookConsumerWidget {
   const AnimationOne({
     Key? key,
     required double width,
+    double height = 40,
+    double borderRadius = 20,
     required double renderPercentage,
+    Color leftColor = _defaultLeftColor,
+    Color rightColor = _defaultRightColor,
   })  : _width = width,
         _renderPercentage = renderPercentage,
+        _height = height,
+        _borderRadius = borderRadius,
+        _leftColor = leftColor,
+        _rightColor = rightColor,
         super(key: key);
 
   final double _width;
   final double _renderPercentage;
+  final double _height;
+  final double _borderRadius;
+  final Color _leftColor;
+  final Color _rightColor;
 
   @override
   ConsumerState<AnimationOne> createState() => _AnimationOneState();
@@ -21,18 +36,29 @@ class AnimationOne extends StatefulHookConsumerWidget {
 
 class _AnimationOneState extends ConsumerState<AnimationOne>
     with SingleTickerProviderStateMixin {
+  final int animationDuration = 1000;
   late AnimationController _animationController;
 
   @override
   void initState() {
     super.initState();
     _animationController = AnimationController(
-      duration: const Duration(milliseconds: 800),
+      duration: Duration(milliseconds: animationDuration),
       vsync: this,
     );
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _animationController.forward(from: 0.0);
-    });
+    _animationController.forward(from: 0.0);
+  }
+
+  @override
+  void didUpdateWidget(AnimationOne oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _animationController.duration = Duration(milliseconds: animationDuration);
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -50,20 +76,18 @@ class _AnimationOneState extends ConsumerState<AnimationOne>
         ),
       ),
     );
-    const height = 40.0;
-    const borderRadius = height / 2.0;
 
     return Container(
       clipBehavior: Clip.hardEdge,
       width: widget._width,
-      height: height,
+      height: widget._height,
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
+        gradient: LinearGradient(
           begin: FractionalOffset.centerLeft,
           end: FractionalOffset.centerRight,
-          colors: [Color(0xff8BC84E), Color(0xff229BEC)],
+          colors: [widget._leftColor, widget._rightColor],
         ),
-        borderRadius: BorderRadius.circular(borderRadius),
+        borderRadius: BorderRadius.circular(widget._borderRadius),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.16),
@@ -78,7 +102,7 @@ class _AnimationOneState extends ConsumerState<AnimationOne>
             alignment: Alignment.centerRight,
             child: Container(
               width: widthTween,
-              height: height,
+              height: widget._height,
               color: Colors.white,
             ),
           ),

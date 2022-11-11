@@ -30,7 +30,7 @@ class _AnimationOneScreenState extends State<AnimationOneScreen> {
           alignment: Alignment.center,
           child: const AnimationOne(
             width: 200,
-            renderPercentage: 0.6,
+            renderPercentage: 0.9,
           ),
         ));
   }
