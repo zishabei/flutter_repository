@@ -33,6 +33,7 @@ dependencies:
   hooks_riverpod: ^1.0.4
   intl: ^0.17.0
   wechat_assets_picker: ^8.1.4
+  camera: ^0.10.0+4
 #  wechat_camera_picker: ^3.6.3
 #  package_info_plus: ^1.4.2
 #  flutter_localizations:

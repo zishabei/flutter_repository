@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_project/widget/animation/animation_one_screen.dart';
@@ -7,7 +8,17 @@ import 'package:flutter_project/widget/test_parameter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
-void main() {
+import 'widget/camera/camera_example_home.dart';
+import 'widget/widget/textfield.dart';
+
+List<CameraDescription> cameras = <CameraDescription>[];
+
+Future<void> main() async {
+  // Fetch the available cameras before initializing the app.
+  try {
+    WidgetsFlutterBinding.ensureInitialized();
+    cameras = await availableCameras();
+  } on CameraException catch (e) {}
   runApp(const ProviderScope(child: MyApp()));
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent),
@@ -82,7 +93,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   onPressed: () async {
                     Navigator.of(context).push(CustomTextField.route);
                   },
-                  child: const Text("自定义文本输入框"))
+                  child: const Text("自定义文本输入框")),
+              ElevatedButton(
+                  onPressed: () async {
+                    Navigator.of(context).push(CameraExampleHome.route);
+                  },
+                  child: const Text("相机")),
+              ElevatedButton(
+                  onPressed: () async {
+                    Navigator.of(context).push(MyTextFormView.route);
+                  },
+                  child: const Text("TextField添加【完成】按钮"))
             ],
           ),
         ));
