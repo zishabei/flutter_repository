@@ -5,6 +5,7 @@ import 'package:flutter_project/widget/animation/animation_one_screen.dart';
 import 'package:flutter_project/widget/calendar/custom_calendar.dart';
 import 'package:flutter_project/widget/custom_text_field.dart';
 import 'package:flutter_project/widget/test_parameter.dart';
+import 'package:flutter_project/widget/widget/layout_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
@@ -103,7 +104,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   onPressed: () async {
                     Navigator.of(context).push(MyTextFormView.route);
                   },
-                  child: const Text("TextField添加【完成】按钮"))
+                  child: const Text("TextField添加【完成】按钮")),
+              ElevatedButton(
+                  onPressed: () async {
+                    Navigator.of(context).push(LayoutTest.route);
+                  },
+                  child: const Text("test layout")),
             ],
           ),
         ));
