@@ -5,6 +5,7 @@ import 'package:flutter_project/widget/animation/animation_one_screen.dart';
 import 'package:flutter_project/widget/calendar/custom_calendar.dart';
 import 'package:flutter_project/widget/custom_text_field.dart';
 import 'package:flutter_project/widget/test_parameter.dart';
+import 'package:flutter_project/widget/widget/custom_widget.dart';
 import 'package:flutter_project/widget/widget/layout_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
@@ -110,6 +111,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     Navigator.of(context).push(LayoutTest.route);
                   },
                   child: const Text("test layout")),
+              ElevatedButton(
+                  onPressed: () async {
+                    Navigator.of(context).push(CustomWidget.route);
+                  },
+                  child: const Text("自定义视图")),
             ],
           ),
         ));
