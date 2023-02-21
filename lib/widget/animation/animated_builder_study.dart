@@ -14,7 +14,8 @@ class AnimatedBuilderStudy extends StatefulWidget {
 }
 
 class _AnimatedBuilderStudyState extends State<AnimatedBuilderStudy> {
-  double targetValue = 24.0;
+  double beginValue = 88.0;
+  double targetValue = 88.0;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class _AnimatedBuilderStudyState extends State<AnimatedBuilderStudy> {
       ),
       body: Center(
         child: TweenAnimationBuilder(
-            tween: Tween(begin: 0.0, end: targetValue),
+            tween: Tween(begin: beginValue, end: targetValue),
             // curve: Curves.elasticInOut,
             duration: const Duration(seconds: 1),
             child: const Icon(Icons.aspect_ratio),
@@ -35,7 +36,8 @@ class _AnimatedBuilderStudyState extends State<AnimatedBuilderStudy> {
                 icon: child!,
                 onPressed: () {
                   setState(() {
-                    targetValue = targetValue == 24.0 ? 48.0 : 24.0;
+                    beginValue = beginValue == 44.0 ? 44.0 : 88.0;
+                    targetValue = targetValue == 44.0 ? 88.0 : 44.0;
                   });
                 },
               );
