@@ -96,16 +96,16 @@ class SmartAnimation extends StatelessWidget {
                       gradient: const LinearGradient(
                         begin: FractionalOffset.centerLeft,
                         end: FractionalOffset.centerRight,
-                        colors: [Colors.yellow, Colors.black],
+                        colors: [Color(0xff8BC84E), Color(0xff229BEC)],
                       ),
                       color: Colors.red,
                       boxShadow: [
                         BoxShadow(
                             color: Colors.grey[400]!,
                             blurRadius: 2,
-                            offset: Offset(0, 2))
+                            offset: const Offset(0, 2))
                       ],
-                      borderRadius: BorderRadius.circular(15)),
+                      borderRadius: BorderRadius.circular(20)),
                 ),
                 Align(
                   alignment: Alignment.centerRight,
@@ -115,9 +115,9 @@ class SmartAnimation extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: anim == 0
-                            ? BorderRadius.circular(15)
+                            ? BorderRadius.circular(20)
                             : const BorderRadius.horizontal(
-                                right: Radius.circular(15))),
+                                right: Radius.circular(20))),
                   ),
                 ),
               ],
