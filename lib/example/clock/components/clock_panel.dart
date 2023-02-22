@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/example/clock/components/clock_center.dart';
 import 'package:flutter_project/example/clock/components/clock_hand.dart';
+import 'package:flutter_project/example/clock/components/clock_hand_second.dart';
 
 class ClockPanel extends StatelessWidget {
-  const ClockPanel({Key? key, required this.size}) : super(key: key);
+  final DateTime now;
+
+  const ClockPanel({Key? key, required this.size, required this.now})
+      : super(key: key);
 
   final Size size;
 
@@ -70,7 +75,6 @@ class ClockPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final now = DateTime.now();
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -89,6 +93,8 @@ class ClockPanel extends StatelessWidget {
             hour: now.hour,
             minute: now.minute,
             second: now.second),
+        ClockHandSecond(clockSize: size, second: now.second),
+        const ClockCenter()
       ],
     );
   }

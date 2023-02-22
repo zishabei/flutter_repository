@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 enum ClockHandType { hour, minute }
@@ -25,9 +27,20 @@ class ClockHand extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-      size: clockSize,
-      painter: ClockHandPainter(clockHandType: clockHandType),
+    double endAngle;
+    if (clockHandType == ClockHandType.hour) {
+      endAngle = 2 * pi / 12 * ((hour * 3600 + minute * 60 + second) / 3600);
+    } else {
+      endAngle = 2 * pi / 60 * ((minute * 60 + second) / 60);
+    }
+
+    // Transform.rotate旋转组件
+    return Transform.rotate(
+      angle: endAngle,
+      child: CustomPaint(
+        size: clockSize,
+        painter: ClockHandPainter(clockHandType: clockHandType),
+      ),
     );
   }
 }
