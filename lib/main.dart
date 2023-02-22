@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_project/example/clock/custom_clock.dart';
+import 'package:flutter_project/value_notifier.dart';
 import 'package:flutter_project/widget/animation/animated_builder_study.dart';
 import 'package:flutter_project/widget/animation/animation_one_screen.dart';
 import 'package:flutter_project/widget/animation/base_animation_study.dart';
@@ -135,7 +136,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     Navigator.of(context).push(CustomClock.route);
                   },
                   child: const Text("自定义钟表")),
-              const CustomMaterialButton()
+              const CustomMaterialButton(),
+              ElevatedButton(
+                  onPressed: () async {
+                    Navigator.of(context).push(ValueNotifierTest.route);
+                  },
+                  child: const Text("value notifier")),
             ],
           ),
         ));
