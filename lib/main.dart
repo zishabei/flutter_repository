@@ -14,6 +14,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 import 'widget/camera/camera_example_home.dart';
+import 'widget/widget/custom_material_button.dart';
 import 'widget/widget/textfield.dart';
 
 List<CameraDescription> cameras = <CameraDescription>[];
@@ -134,6 +135,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Navigator.of(context).push(CustomClock.route);
                   },
                   child: const Text("自定义钟表")),
+              const CustomMaterialButton()
             ],
           ),
         ));

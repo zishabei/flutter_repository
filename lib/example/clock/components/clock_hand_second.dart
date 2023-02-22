@@ -15,24 +15,6 @@ class ClockHandSecond extends StatelessWidget {
     final beginAngle = 2 * pi / 60 * (second - 1);
     final endAngle = 2 * pi / 60 * second;
 
-    // if (second == 0) {
-    //   return TweenAnimationBuilder<double>(
-    //     key: const ValueKey("prevent overlap"),
-    //     duration: const Duration(milliseconds: 300),
-    //     curve: Curves.easeInQuint,
-    //     tween: Tween<double>(begin: beginAngle, end: endAngle),
-    //     builder: (context, anim, child) {
-    //       return Transform.rotate(
-    //         angle: anim,
-    //         child: CustomPaint(
-    //           size: clockSize,
-    //           painter: SecondHandPainter(),
-    //         ),
-    //       );
-    //     },
-    //   );
-    // }
-
     return TweenAnimationBuilder<double>(
       key: UniqueKey(),
       duration: const Duration(milliseconds: 300),
