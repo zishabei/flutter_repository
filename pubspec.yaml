@@ -30,7 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_hooks: ^0.18.0
-  hooks_riverpod: ^1.0.4
+  hooks_riverpod: ^2.2.0
   intl: ^0.17.0
   wechat_assets_picker: ^8.1.4
   camera: ^0.10.0+4
@@ -39,6 +39,8 @@ dependencies:
 #  package_info_plus: ^1.4.2
 #  flutter_localizations:
 #    sdk: flutter
+  flutter_riverpod: ^2.1.3
+  riverpod_annotation: ^1.1.1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -55,6 +57,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  build_runner:
+  riverpod_generator: ^1.1.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

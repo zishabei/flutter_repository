@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_project/example/clock/custom_clock.dart';
+import 'package:flutter_project/riverpod/hello_riverpod.dart';
 import 'package:flutter_project/useplugin/web_view_test.dart';
 import 'package:flutter_project/value_notifier.dart';
 import 'package:flutter_project/widget/animation/animated_builder_study.dart';
@@ -148,6 +149,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     Navigator.of(context).push(WebViewTest.route);
                   },
                   child: const Text("web view")),
+              ElevatedButton(
+                  onPressed: () async {
+                    Navigator.of(context).push(HelloRiverpod.route);
+                  },
+                  child: const Text("riverpod")),
             ],
           ),
         ));
