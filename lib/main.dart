@@ -16,6 +16,7 @@ import 'package:flutter_project/widget/widget/layout_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
+import 'change_notifier.dart';
 import 'widget/camera/camera_example_home.dart';
 import 'widget/widget/custom_material_button.dart';
 import 'widget/widget/textfield.dart';
@@ -66,95 +67,103 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        body: Container(
-          alignment: Alignment.topCenter,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(CustomCalendar.route);
-                  },
-                  child: const Text("custom calendar")),
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(AnimationOneScreen.route);
-                  },
-                  child: const Text("animation one")),
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(CustomCalendar.route);
-                  },
-                  child: const Text("custom calendar")),
-              ElevatedButton(
-                  onPressed: () async {
-                    final List<AssetEntity>? result =
-                        await AssetPicker.pickAssets(context);
-                  },
-                  child: const Text("选择照片")),
-              ElevatedButton(
-                  onPressed: () async {
-                    Navigator.of(context).push(TestParameterScreen.route);
-                  },
-                  child: const Text("测试属性")),
-              ElevatedButton(
-                  onPressed: () async {
-                    Navigator.of(context).push(CustomTextField.route);
-                  },
-                  child: const Text("自定义文本输入框")),
-              ElevatedButton(
-                  onPressed: () async {
-                    Navigator.of(context).push(CameraExampleHome.route);
-                  },
-                  child: const Text("相机")),
-              ElevatedButton(
-                  onPressed: () async {
-                    Navigator.of(context).push(MyTextFormView.route);
-                  },
-                  child: const Text("TextField添加【完成】按钮")),
-              ElevatedButton(
-                  onPressed: () async {
-                    Navigator.of(context).push(LayoutTest.route);
-                  },
-                  child: const Text("test layout")),
-              ElevatedButton(
-                  onPressed: () async {
-                    Navigator.of(context).push(CustomWidget.route);
-                  },
-                  child: const Text("自定义视图")),
-              ElevatedButton(
-                  onPressed: () async {
-                    Navigator.of(context).push(BaseAnimationStudy.route);
-                  },
-                  child: const Text("基础动画")),
-              ElevatedButton(
-                  onPressed: () async {
-                    Navigator.of(context).push(AnimatedBuilderStudy.route);
-                  },
-                  child: const Text("高效动画")),
-              ElevatedButton(
-                  onPressed: () async {
-                    Navigator.of(context).push(CustomClock.route);
-                  },
-                  child: const Text("自定义钟表")),
-              const CustomMaterialButton(),
-              ElevatedButton(
-                  onPressed: () async {
-                    Navigator.of(context).push(ValueNotifierTest.route);
-                  },
-                  child: const Text("value notifier")),
-              ElevatedButton(
-                  onPressed: () async {
-                    Navigator.of(context).push(WebViewTest.route);
-                  },
-                  child: const Text("web view")),
-              ElevatedButton(
-                  onPressed: () async {
-                    Navigator.of(context).push(HelloRiverpod.route);
-                  },
-                  child: const Text("riverpod")),
-            ],
+        body: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.only(top: 20, bottom: 40),
+            alignment: Alignment.topCenter,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(CustomCalendar.route);
+                    },
+                    child: const Text("custom calendar")),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(AnimationOneScreen.route);
+                    },
+                    child: const Text("animation one")),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(CustomCalendar.route);
+                    },
+                    child: const Text("custom calendar")),
+                ElevatedButton(
+                    onPressed: () async {
+                      final List<AssetEntity>? result =
+                          await AssetPicker.pickAssets(context);
+                    },
+                    child: const Text("选择照片")),
+                ElevatedButton(
+                    onPressed: () async {
+                      Navigator.of(context).push(TestParameterScreen.route);
+                    },
+                    child: const Text("测试属性")),
+                ElevatedButton(
+                    onPressed: () async {
+                      Navigator.of(context).push(CustomTextField.route);
+                    },
+                    child: const Text("自定义文本输入框")),
+                ElevatedButton(
+                    onPressed: () async {
+                      Navigator.of(context).push(CameraExampleHome.route);
+                    },
+                    child: const Text("相机")),
+                ElevatedButton(
+                    onPressed: () async {
+                      Navigator.of(context).push(MyTextFormView.route);
+                    },
+                    child: const Text("TextField添加【完成】按钮")),
+                ElevatedButton(
+                    onPressed: () async {
+                      Navigator.of(context).push(LayoutTest.route);
+                    },
+                    child: const Text("test layout")),
+                ElevatedButton(
+                    onPressed: () async {
+                      Navigator.of(context).push(CustomWidget.route);
+                    },
+                    child: const Text("自定义视图")),
+                ElevatedButton(
+                    onPressed: () async {
+                      Navigator.of(context).push(BaseAnimationStudy.route);
+                    },
+                    child: const Text("基础动画")),
+                ElevatedButton(
+                    onPressed: () async {
+                      Navigator.of(context).push(AnimatedBuilderStudy.route);
+                    },
+                    child: const Text("高效动画")),
+                ElevatedButton(
+                    onPressed: () async {
+                      Navigator.of(context).push(CustomClock.route);
+                    },
+                    child: const Text("自定义钟表")),
+                const CustomMaterialButton(),
+                ElevatedButton(
+                    onPressed: () async {
+                      Navigator.of(context).push(ChangeNotifierWidget.route);
+                    },
+                    child: const Text("change notifier")),
+                ElevatedButton(
+                    onPressed: () async {
+                      Navigator.of(context).push(ValueNotifierTest.route);
+                    },
+                    child: const Text("value notifier")),
+                ElevatedButton(
+                    onPressed: () async {
+                      Navigator.of(context).push(WebViewTest.route);
+                    },
+                    child: const Text("web view")),
+                ElevatedButton(
+                    onPressed: () async {
+                      Navigator.of(context).push(HelloRiverpod.route);
+                    },
+                    child: const Text("riverpod")),
+              ],
+            ),
           ),
         ));
   }

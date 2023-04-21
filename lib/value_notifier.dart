@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'widget/app_debug.dart';
+
 class ValueNotifierTest extends StatefulWidget {
   const ValueNotifierTest({Key? key}) : super(key: key);
 
@@ -28,7 +30,7 @@ class _ValueNotifierTestState extends State<ValueNotifierTest> {
             title: const Text('AnimatedBuilder example')),
         body: CounterBody(counterValueNotifier: _counter),
         floatingActionButton: FloatingActionButton(
-          onPressed: () => _counter.value++,
+          onPressed: () => _counter.value = 0,
           child: const Icon(Icons.add),
         ),
       ),
@@ -59,6 +61,8 @@ class CounterBody extends StatelessWidget {
             // [AnimatedBuilder] accepts any [Listenable] subtype.
             animation: counterValueNotifier,
             builder: (BuildContext context, Widget? child) {
+              AppDebug.log(
+                  "AnimatedBuilder counterValueNotifier.value:${counterValueNotifier.value}");
               return Text('${counterValueNotifier.value}');
             },
           ),
@@ -67,6 +71,8 @@ class CounterBody extends StatelessWidget {
             builder: (BuildContext context, int value, Widget? child) {
               // This builder will only get called when the counterValueNotifier
               // is updated.
+              AppDebug.log(
+                  "ValueListenableBuilder counterValueNotifier.value:${counterValueNotifier.value}");
               return Text('$value');
             },
             valueListenable: counterValueNotifier,
