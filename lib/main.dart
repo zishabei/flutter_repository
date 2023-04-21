@@ -12,6 +12,7 @@ import 'package:flutter_project/widget/calendar/custom_calendar.dart';
 import 'package:flutter_project/widget/custom_text_field.dart';
 import 'package:flutter_project/widget/test_parameter.dart';
 import 'package:flutter_project/widget/widget/custom_widget.dart';
+import 'package:flutter_project/widget/widget/inherited_widget_test.dart';
 import 'package:flutter_project/widget/widget/layout_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
@@ -158,10 +159,17 @@ class _MyHomePageState extends State<MyHomePage> {
                     },
                     child: const Text("web view")),
                 ElevatedButton(
-                    onPressed: () async {
-                      Navigator.of(context).push(HelloRiverpod.route);
-                    },
-                    child: const Text("riverpod")),
+                  onPressed: () async {
+                    Navigator.of(context).push(HelloRiverpod.route);
+                  },
+                  child: const Text("riverpod"),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    Navigator.of(context).push(InheritedWidgetTest.route);
+                  },
+                  child: const Text("Inherited Widget Sample"),
+                ),
               ],
             ),
           ),
