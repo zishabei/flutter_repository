@@ -19,6 +19,7 @@ import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 import 'change_notifier.dart';
 import 'widget/camera/camera_example_home.dart';
+import 'widget/widget/audio_players_test.dart';
 import 'widget/widget/custom_material_button.dart';
 import 'widget/widget/textfield.dart';
 
@@ -169,6 +170,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     Navigator.of(context).push(InheritedWidgetTest.route);
                   },
                   child: const Text("Inherited Widget Sample"),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    Navigator.of(context).push(AudioPayersTest.route);
+                  },
+                  child: const Text("audioplayers"),
                 ),
               ],
             ),
