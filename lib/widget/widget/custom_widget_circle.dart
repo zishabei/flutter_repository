@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-class CustomWidgetCircle extends StatefulWidget {
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+class CustomWidgetCircle extends ConsumerStatefulWidget {
   const CustomWidgetCircle({Key? key}) : super(key: key);
 
   static Route get route {
@@ -11,34 +13,62 @@ class CustomWidgetCircle extends StatefulWidget {
   }
 
   @override
-  State<CustomWidgetCircle> createState() => _CustomWidgetCircleState();
+  ConsumerState<CustomWidgetCircle> createState() => _CustomWidgetCircleState();
 }
 
-class _CustomWidgetCircleState extends State<CustomWidgetCircle> {
+class _CustomWidgetCircleState extends ConsumerState<CustomWidgetCircle> {
+  final progressProvider = StateProvider<double>((ref) => 0);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("CustomWidgetCircle"),
-      ),
-      body: SizedBox(
-        width: double.infinity,
-        height: 200,
-        child: CustomPaint(
-          painter: CirclePainter(120),
-          child: SizedBox(
-            child: Align(
-              alignment: Alignment.topRight,
-              child: Container(
-                color: const Color(0xFFD1EFE3),
-                width: 30,
-                height: 30,
-              ),
-            ),
-          ),
+        appBar: AppBar(
+          title: const Text("CustomWidgetCircle"),
         ),
-      ),
-    );
+        body: Center(
+          child: Column(
+            children: [
+              Stack(alignment: Alignment.topCenter, children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: Container(
+                      color: const Color(0xFFD15553),
+                      width: 30,
+                      height: 30,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: TweenAnimationBuilder<double>(
+                      key: UniqueKey(),
+                      tween: Tween<double>(
+                          begin: 0, end: ref.watch(progressProvider)),
+                      duration: const Duration(seconds: 1),
+                      curve: Curves.easeInOutCubic,
+                      builder: (context, anim, child) {
+                        return CustomPaint(
+                          size: const Size(250, 250),
+                          painter: CirclePainter(anim),
+                        );
+                      }),
+                ),
+              ]),
+              ElevatedButton(
+                  onPressed: () async {
+                    ref.read(progressProvider.notifier).state = 270;
+                  },
+                  child: const Text("270")),
+              ElevatedButton(
+                  onPressed: () async {
+                    ref.read(progressProvider.notifier).state = 80;
+                  },
+                  child: const Text("80")),
+            ],
+          ),
+        ));
   }
 }
 
