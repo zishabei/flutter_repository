@@ -12,6 +12,7 @@ import 'package:flutter_project/widget/calendar/custom_calendar.dart';
 import 'package:flutter_project/widget/custom_text_field.dart';
 import 'package:flutter_project/widget/test_parameter.dart';
 import 'package:flutter_project/widget/widget/custom_widget.dart';
+import 'package:flutter_project/widget/widget/custom_widget_circle.dart';
 import 'package:flutter_project/widget/widget/inherited_widget_test.dart';
 import 'package:flutter_project/widget/widget/layout_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -128,6 +129,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       Navigator.of(context).push(CustomWidget.route);
                     },
                     child: const Text("自定义视图")),
+                ElevatedButton(
+                    onPressed: () async {
+                      Navigator.of(context).push(CustomWidgetCircle.route);
+                    },
+                    child: const Text("自定义⭕️视图")),
                 ElevatedButton(
                     onPressed: () async {
                       Navigator.of(context).push(BaseAnimationStudy.route);
