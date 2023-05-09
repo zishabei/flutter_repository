@@ -1,6 +1,11 @@
-import 'package:flutter/material.dart';
-import 'dart:math' as math;
+import 'dart:math';
 
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_project/gen/assets/assets.gen.dart';
+import 'package:flutter_project/widget/app_debug.dart';
+import 'dart:math' as math;
+import 'dart:ui' as ui;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class CustomWidgetCircle extends ConsumerStatefulWidget {
@@ -42,39 +47,98 @@ class _CustomWidgetCircleState extends ConsumerState<CustomWidgetCircle> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(18.0),
-                  child: TweenAnimationBuilder<double>(
-                      key: UniqueKey(),
-                      tween: Tween<double>(
-                          begin: 0, end: ref.watch(progressProvider)),
-                      duration: const Duration(seconds: 1),
-                      curve: Curves.easeInOutCubic,
-                      builder: (context, anim, child) {
-                        return CustomPaint(
-                          size: const Size(250, 250),
-                          painter: CirclePainter(anim),
-                        );
-                      }),
+                  child: FutureBuilder<ui.Image>(
+                    future: _loadImage("assets/menu_faq.png"),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<ui.Image> snapshot) {
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.waiting:
+                          return const Text('Image loading...');
+                        default:
+                          if (snapshot.hasError) {
+                            return Text('Error: ${snapshot.error}');
+                          } else {
+                            return TweenAnimationBuilder<double>(
+                                key: UniqueKey(),
+                                tween: Tween<double>(
+                                    begin: 0, end: ref.watch(progressProvider)),
+                                duration: const Duration(seconds: 1),
+                                curve: Curves.easeInOutCubic,
+                                builder: (context, anim, child) {
+                                  return CustomPaint(
+                                    size: const Size(250, 250),
+                                    painter:
+                                        CirclePainter(anim, snapshot.data!),
+                                  );
+                                });
+                          }
+                      }
+                    },
+                  ),
                 ),
               ]),
               ElevatedButton(
                   onPressed: () async {
-                    ref.read(progressProvider.notifier).state = 270;
+                    ref.read(progressProvider.notifier).state = 340;
                   },
-                  child: const Text("270")),
+                  child: const Text("340")),
               ElevatedButton(
                   onPressed: () async {
-                    ref.read(progressProvider.notifier).state = 80;
+                    ref.read(progressProvider.notifier).state = 200;
                   },
-                  child: const Text("80")),
+                  child: const Text("200")),
+              ElevatedButton(
+                  onPressed: () async {
+                    ref.read(progressProvider.notifier).state = 180;
+                  },
+                  child: const Text("180")),
+              ElevatedButton(
+                  onPressed: () async {
+                    ref.read(progressProvider.notifier).state = 150;
+                  },
+                  child: const Text("150")),
+              ElevatedButton(
+                  onPressed: () async {
+                    ref.read(progressProvider.notifier).state = 90;
+                  },
+                  child: const Text("90")),
+              ElevatedButton(
+                  onPressed: () async {
+                    ref.read(progressProvider.notifier).state = 10;
+                  },
+                  child: const Text("10")),
+              ElevatedButton(
+                  onPressed: () async {
+                    ref.read(progressProvider.notifier).state = 500;
+                  },
+                  child: const Text("500")),
+              ElevatedButton(
+                  onPressed: () async {
+                    ref.read(progressProvider.notifier).state = -10;
+                  },
+                  child: const Text("-10")),
             ],
           ),
         ));
+  }
+
+  Future<ui.Image> _loadImage(String imageAssetPath) async {
+    final ByteData data = await rootBundle.load(imageAssetPath);
+    final codec = await ui.instantiateImageCodec(
+      data.buffer.asUint8List(),
+      targetHeight: 30,
+      targetWidth: 30,
+    );
+    var frame = await codec.getNextFrame();
+    return frame.image;
   }
 }
 
 class CirclePainter extends CustomPainter {
   final double sweepAngle; // 黄色ゲージの進行度 360°
-  CirclePainter(this.sweepAngle);
+  final ui.Image image;
+
+  CirclePainter(this.sweepAngle, this.image);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -116,6 +180,21 @@ class CirclePainter extends CustomPainter {
     canvas.drawCircle(center, size.height / 2, backgroundCirclePaint);
     canvas.drawPath(basePath, basePaint);
     canvas.drawPath(progressPath, progressPaint);
+    final imagePaint = Paint();
+    final x0 = size.width / 2;
+    final y0 = size.height / 2;
+    final r = size.width / 2;
+    final ao = sweepAngle;
+
+    final x1 = x0 + r * cos((ao - 90) * 3.14 / 180);
+    final y1 = y0 + r * sin((ao - 90) * 3.14 / 180);
+    AppDebug.log(
+        "cos(sweepAngle * 3.14 / 180):${cos(sweepAngle * 3.14 / 180)}");
+    AppDebug.log(
+        "sin(sweepAngle * 3.14 / 180):${sin(sweepAngle * 3.14 / 180)}");
+    AppDebug.log("size.width:${size.width},size.height:${size.height}");
+    AppDebug.log("sweepAngle:$sweepAngle,x1:$x1,y1:$y1");
+    canvas.drawImage(image, Offset(x1 - 15, y1 - 15), imagePaint);
   }
 
   @override
