@@ -56,9 +56,9 @@ class _CustomWidgetCircleState extends ConsumerState<CustomWidgetCircle> {
               ]),
               ElevatedButton(
                   onPressed: () async {
-                    ref.read(progressProvider.notifier).state = 340;
+                    ref.read(progressProvider.notifier).state = 360;
                   },
-                  child: const Text("340")),
+                  child: const Text("360")),
               ElevatedButton(
                   onPressed: () async {
                     ref.read(progressProvider.notifier).state = 200;
