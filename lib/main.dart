@@ -76,8 +76,10 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.only(top: 20, bottom: 40),
             alignment: Alignment.topCenter,
             child: Wrap(
-              spacing: 12.0, // gap between adjacent chips
-              runSpacing: 4.0, // gap between lines
+              spacing: 12.0,
+              runSpacing: 8.0,
+              alignment: WrapAlignment.center,
+              crossAxisAlignment: WrapCrossAlignment.center,
               children: <Widget>[
                 ElevatedButton(
                     onPressed: () {
