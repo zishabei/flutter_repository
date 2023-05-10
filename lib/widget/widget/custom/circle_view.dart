@@ -13,6 +13,9 @@ class CircleView extends StatelessWidget {
       required this.progress,
       required this.baseColor,
       required this.progressColor,
+      this.progressTopColor = const Color(0xFFFDFF87),
+      this.progressBottomColor = const Color(0xFF6CCEAE),
+      this.backgroundColor,
       required this.progressImage,
       required this.size,
       required this.baseStrokeWidth,
@@ -22,6 +25,9 @@ class CircleView extends StatelessWidget {
   final double progress;
   final Color baseColor;
   final Color progressColor;
+  final Color progressTopColor;
+  final Color progressBottomColor;
+  final Color? backgroundColor;
   final AssetGenImage progressImage;
   final Size size;
   final int imageSize;
@@ -49,13 +55,17 @@ class CircleView extends StatelessWidget {
                     return CustomPaint(
                       size: size,
                       painter: CirclePainter(
-                          anim,
-                          snapshot.data!,
-                          baseColor,
-                          progressColor,
-                          baseStrokeWidth,
-                          progressStrokeWidth,
-                          imageSize),
+                        anim,
+                        snapshot.data!,
+                        baseColor,
+                        progressColor,
+                        baseStrokeWidth,
+                        progressStrokeWidth,
+                        imageSize,
+                        progressTopColor,
+                        progressBottomColor,
+                        backgroundColor,
+                      ),
                     );
                   });
             }
@@ -80,28 +90,53 @@ class CirclePainter extends CustomPainter {
   final double sweepAngle;
   final Color baseColor;
   final Color progressColor;
+  final Color progressTopColor;
+  final Color progressBottomColor;
+  final Color? backgroundColor;
   final ui.Image image;
   final double baseStrokeWidth;
   final double progressStrokeWidth;
   final int imageSize;
 
-  CirclePainter(this.sweepAngle, this.image, this.baseColor, this.progressColor,
-      this.baseStrokeWidth, this.progressStrokeWidth, this.imageSize);
+  CirclePainter(
+      this.sweepAngle,
+      this.image,
+      this.baseColor,
+      this.progressColor,
+      this.baseStrokeWidth,
+      this.progressStrokeWidth,
+      this.imageSize,
+      this.progressTopColor,
+      this.progressBottomColor,
+      this.backgroundColor);
 
   @override
   void paint(Canvas canvas, Size size) {
     double degToRad(double deg) => deg * (math.pi / 180.0);
     final center = Offset(size.width / 2, size.height / 2);
-    final Paint backgroundCirclePaint = Paint()..color = Colors.white;
     final Paint basePaint = Paint()
       ..strokeWidth = baseStrokeWidth
       ..style = PaintingStyle.stroke
       ..color = baseColor;
+
+    Gradient gradient = SweepGradient(
+      center: FractionalOffset.center,
+      colors: <Color>[
+        progressTopColor,
+        progressBottomColor,
+        progressBottomColor,
+        progressTopColor,
+      ],
+      stops: <double>[0.0, 0.44, 0.55, 1],
+      transform: GradientRotation(-pi / 2),
+    );
+    final rect = Rect.fromLTWH(0, 0, size.width, size.height);
+
     final Paint progressPaint = Paint()
       ..strokeWidth = progressStrokeWidth
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
-      ..color = progressColor;
+      ..shader = gradient.createShader(rect);
 
     final basePath = Path()
       ..arcTo(
@@ -125,7 +160,12 @@ class CirclePainter extends CustomPainter {
         degToRad(sweepAngle),
         false,
       );
-    canvas.drawCircle(center, size.height / 2, backgroundCirclePaint);
+
+    if (backgroundColor != null) {
+      final Paint backgroundCirclePaint = Paint()..color = backgroundColor!;
+      canvas.drawCircle(center, size.height / 2, backgroundCirclePaint);
+    }
+
     canvas.drawPath(basePath, basePaint);
     canvas.drawPath(progressPath, progressPaint);
     final imagePaint = Paint();
