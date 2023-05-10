@@ -62,31 +62,6 @@ class _CustomWidgetCircleState extends ConsumerState<CustomWidgetCircle> {
                     ),
                   ]),
                 ),
-                const SizedBox(
-                  height: 40,
-                ),
-                const CircleProgress(),
-                Padding(
-                  padding: const EdgeInsets.all(40),
-                  child: Container(
-                    width: 300,
-                    height: 300,
-                    decoration: const BoxDecoration(
-                      gradient: SweepGradient(
-                        center: FractionalOffset.center,
-                        colors: <Color>[
-                          Color(0xFFFDFF87),
-                          Color(0xFF6CCEAE),
-                          Color(0xFF6CCEAE),
-                          Color(0xFFFDFF87),
-                          // blue again to seamlessly transition to the start
-                        ],
-                        stops: <double>[0.0, 0.33, 0.66, 1],
-                        transform: GradientRotation(-pi / 2),
-                      ),
-                    ),
-                  ),
-                ),
                 ElevatedButton(
                     onPressed: () async {
                       ref.read(progressProvider.notifier).state = 360;
@@ -127,6 +102,31 @@ class _CustomWidgetCircleState extends ConsumerState<CustomWidgetCircle> {
                       ref.read(progressProvider.notifier).state = -10;
                     },
                     child: const Text("-10")),
+                const SizedBox(
+                  height: 40,
+                ),
+                const CircleProgress(),
+                Padding(
+                  padding: const EdgeInsets.all(40),
+                  child: Container(
+                    width: 300,
+                    height: 300,
+                    decoration: const BoxDecoration(
+                      gradient: SweepGradient(
+                        center: FractionalOffset.center,
+                        colors: <Color>[
+                          Color(0xFFFDFF87),
+                          Color(0xFF6CCEAE),
+                          Color(0xFF6CCEAE),
+                          Color(0xFFFDFF87),
+                          // blue again to seamlessly transition to the start
+                        ],
+                        stops: <double>[0.0, 0.33, 0.66, 1],
+                        transform: GradientRotation(-pi / 2),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
