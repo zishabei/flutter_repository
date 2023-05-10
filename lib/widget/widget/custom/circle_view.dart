@@ -39,36 +39,31 @@ class CircleView extends StatelessWidget {
     return FutureBuilder<ui.Image>(
       future: _loadImage(progressImage.path),
       builder: (BuildContext context, AsyncSnapshot<ui.Image> snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.waiting:
-            return const Text('Image loading...');
-          default:
-            if (snapshot.hasError) {
-              return Text('Error: ${snapshot.error}');
-            } else {
-              return TweenAnimationBuilder<double>(
-                  key: UniqueKey(),
-                  tween: Tween<double>(begin: 0, end: progress),
-                  duration: const Duration(seconds: 1),
-                  curve: Curves.easeInOutCubic,
-                  builder: (context, anim, child) {
-                    return CustomPaint(
-                      size: size,
-                      painter: CirclePainter(
-                        anim,
-                        snapshot.data!,
-                        baseColor,
-                        progressColor,
-                        baseStrokeWidth,
-                        progressStrokeWidth,
-                        imageSize,
-                        progressTopColor,
-                        progressBottomColor,
-                        backgroundColor,
-                      ),
-                    );
-                  });
-            }
+        if (snapshot.hasData) {
+          return TweenAnimationBuilder<double>(
+              key: UniqueKey(),
+              tween: Tween<double>(begin: 0, end: progress),
+              duration: const Duration(seconds: 1),
+              curve: Curves.easeInOutCubic,
+              builder: (context, anim, child) {
+                return CustomPaint(
+                  size: size,
+                  painter: CirclePainter(
+                    anim,
+                    snapshot.data!,
+                    baseColor,
+                    progressColor,
+                    baseStrokeWidth,
+                    progressStrokeWidth,
+                    imageSize,
+                    progressTopColor,
+                    progressBottomColor,
+                    backgroundColor,
+                  ),
+                );
+              });
+        } else {
+          return const SizedBox();
         }
       },
     );
@@ -127,8 +122,8 @@ class CirclePainter extends CustomPainter {
         progressBottomColor,
         progressTopColor,
       ],
-      stops: <double>[0.0, 0.44, 0.55, 1],
-      transform: GradientRotation(-pi / 2),
+      stops: const <double>[0.0, 0.5, 0.5, 1],
+      transform: const GradientRotation(-pi / 2),
     );
     final rect = Rect.fromLTWH(0, 0, size.width, size.height);
 
