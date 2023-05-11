@@ -8,23 +8,21 @@ import 'dart:math' as math;
 import 'dart:ui' as ui;
 
 class CircleView extends StatelessWidget {
-  const CircleView(
-      {Key? key,
-      required this.progress,
-      required this.baseColor,
-      required this.progressColor,
-      this.progressTopColor = const Color(0xFFFDFF87),
-      this.progressBottomColor = const Color(0xFF6CCEAE),
-      this.backgroundColor,
-      required this.progressImage,
-      required this.size,
-      required this.baseStrokeWidth,
-      required this.progressStrokeWidth,
-      required this.imageSize})
-      : super(key: key);
+  const CircleView({
+    Key? key,
+    required this.progress,
+    required this.baseColor,
+    this.progressTopColor = const Color(0xFFFDFF87),
+    this.progressBottomColor = const Color(0xFF6CCEAE),
+    this.backgroundColor,
+    required this.size,
+    required this.progressImage,
+    required this.imageSize,
+    required this.baseStrokeWidth,
+    required this.progressStrokeWidth,
+  }) : super(key: key);
   final double progress;
   final Color baseColor;
-  final Color progressColor;
   final Color progressTopColor;
   final Color progressBottomColor;
   final Color? backgroundColor;
@@ -52,7 +50,6 @@ class CircleView extends StatelessWidget {
                     anim,
                     snapshot.data!,
                     baseColor,
-                    progressColor,
                     baseStrokeWidth,
                     progressStrokeWidth,
                     imageSize,
@@ -84,7 +81,6 @@ class CircleView extends StatelessWidget {
 class CirclePainter extends CustomPainter {
   final double sweepAngle;
   final Color baseColor;
-  final Color progressColor;
   final Color progressTopColor;
   final Color progressBottomColor;
   final Color? backgroundColor;
@@ -97,7 +93,6 @@ class CirclePainter extends CustomPainter {
       this.sweepAngle,
       this.image,
       this.baseColor,
-      this.progressColor,
       this.baseStrokeWidth,
       this.progressStrokeWidth,
       this.imageSize,

@@ -52,7 +52,6 @@ class _CustomWidgetCircleState extends ConsumerState<CustomWidgetCircle> {
                       child: CircleView(
                         progress: ref.watch(progressProvider),
                         baseColor: const Color(0xFF275B43),
-                        progressColor: const Color(0xff449070),
                         progressImage: Assets.menuDeleteAccount,
                         size: const Size(400, 400),
                         progressStrokeWidth: 22,
@@ -61,6 +60,51 @@ class _CustomWidgetCircleState extends ConsumerState<CustomWidgetCircle> {
                       ),
                     ),
                   ]),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(26.0),
+                      child: CircleView(
+                        progress: ref.watch(progressProvider),
+                        baseColor: Colors.black,
+                        progressTopColor: Colors.red,
+                        progressBottomColor: Colors.blue,
+                        progressImage: Assets.menuDeleteAccount,
+                        size: const Size(200, 200),
+                        progressStrokeWidth: 22,
+                        baseStrokeWidth: 18,
+                        imageSize: 55,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(26.0),
+                      child: CircleView(
+                        progress: ref.watch(progressProvider),
+                        baseColor: Colors.lightGreenAccent,
+                        progressTopColor: Colors.teal,
+                        progressBottomColor: Colors.deepPurple,
+                        progressImage: Assets.menuFaq,
+                        size: const Size(300, 300),
+                        progressStrokeWidth: 22,
+                        baseStrokeWidth: 18,
+                        imageSize: 80,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(26.0),
+                      child: CircleView(
+                        progress: ref.watch(progressProvider),
+                        baseColor: const Color(0xFF275B43),
+                        progressImage: Assets.menuAccount,
+                        size: const Size(400, 400),
+                        progressStrokeWidth: 22,
+                        baseStrokeWidth: 18,
+                        imageSize: 55,
+                      ),
+                    ),
+                  ],
                 ),
                 ElevatedButton(
                     onPressed: () async {
