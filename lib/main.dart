@@ -1,7 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_project/example/banners/banners.dart';
 import 'package:flutter_project/example/clock/custom_clock.dart';
 import 'package:flutter_project/riverpod/future_provider/future_provider_test.dart';
 import 'package:flutter_project/riverpod/hello_riverpod.dart';
@@ -199,12 +198,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     Navigator.of(context).push(FutureProviderTest.route);
                   },
                   child: buttonText("FutureProvider"),
-                ),
-                ElevatedButton(
-                  onPressed: () async {
-                    Navigator.of(context).push(Banners.route);
-                  },
-                  child: buttonText("Banners"),
                 ),
               ],
             ),
