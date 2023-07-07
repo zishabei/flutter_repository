@@ -13,6 +13,7 @@ import 'package:flutter_project/widget/animation/base_animation_study.dart';
 import 'package:flutter_project/widget/calendar/custom_calendar.dart';
 import 'package:flutter_project/widget/custom_text_field.dart';
 import 'package:flutter_project/widget/test_parameter.dart';
+import 'package:flutter_project/widget/widget/bottom_navigation.dart';
 import 'package:flutter_project/widget/widget/custom_widget.dart';
 import 'package:flutter_project/widget/widget/custom_widget_circle.dart';
 import 'package:flutter_project/widget/widget/inherited_widget_test.dart';
@@ -198,6 +199,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     Navigator.of(context).push(FutureProviderTest.route);
                   },
                   child: buttonText("FutureProvider"),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    Navigator.of(context).push(BottomNavigationBarExampleApp.route);
+                  },
+                  child: buttonText("BottomNavigationBar"),
                 ),
               ],
             ),
