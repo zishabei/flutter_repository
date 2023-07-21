@@ -16,6 +16,7 @@ import 'package:flutter_project/widget/test_parameter.dart';
 import 'package:flutter_project/widget/widget/bottom_navigation.dart';
 import 'package:flutter_project/widget/widget/custom_widget.dart';
 import 'package:flutter_project/widget/widget/custom_widget_circle.dart';
+import 'package:flutter_project/widget/widget/custom_widget_circle_two.dart';
 import 'package:flutter_project/widget/widget/inherited_widget_test.dart';
 import 'package:flutter_project/widget/widget/layout_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -146,6 +147,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       Navigator.of(context).push(CustomWidgetCircle.route);
                     },
                     child: buttonText("自定义⭕️视图")),
+                ElevatedButton(
+                    onPressed: () async {
+                      Navigator.of(context).push(CustomWidgetCircleTwo.route);
+                    },
+                    child: buttonText("自定义半圆⭕️视图")),
                 ElevatedButton(
                     onPressed: () async {
                       Navigator.of(context).push(BaseAnimationStudy.route);
