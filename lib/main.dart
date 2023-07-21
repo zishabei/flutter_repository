@@ -19,13 +19,18 @@ import 'package:flutter_project/widget/widget/custom_widget_circle.dart';
 import 'package:flutter_project/widget/widget/inherited_widget_test.dart';
 import 'package:flutter_project/widget/widget/layout_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 import 'change_notifier.dart';
+import 'useplugin/fl_chart/fl_bar_chart_example.dart';
+import 'useplugin/fl_chart/fl_bar_chart_example_2.dart';
+import 'useplugin/fl_chart/fl_liner_chart_example.dart';
 import 'widget/camera/camera_example_home.dart';
 import 'widget/widget/audio_players_test.dart';
 import 'widget/widget/custom_material_button.dart';
 import 'widget/widget/textfield.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 List<CameraDescription> cameras = <CameraDescription>[];
 
@@ -34,6 +39,8 @@ Future<void> main() async {
   try {
     WidgetsFlutterBinding.ensureInitialized();
     cameras = await availableCameras();
+    Intl.defaultLocale = 'ja_JP';
+    await initializeDateFormatting("ja_JP");
   } on CameraException catch (e) {}
   runApp(const ProviderScope(child: MyApp()));
   SystemChrome.setSystemUIOverlayStyle(
@@ -202,9 +209,28 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    Navigator.of(context).push(BottomNavigationBarExampleApp.route);
+                    Navigator.of(context)
+                        .push(BottomNavigationBarExampleApp.route);
                   },
                   child: buttonText("BottomNavigationBar"),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    Navigator.of(context).push(FlBarChartExample.route);
+                  },
+                  child: buttonText("FlBarChartExample"),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    Navigator.of(context).push(BarChartSample1.route);
+                  },
+                  child: buttonText("BarChartSample1"),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    Navigator.of(context).push(FlLineChartExample.route);
+                  },
+                  child: buttonText("FlLineChartExample"),
                 ),
               ],
             ),
