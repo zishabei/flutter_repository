@@ -11,6 +11,7 @@ import 'package:flutter_project/value_notifier.dart';
 import 'package:flutter_project/widget/animation/animated_builder_study.dart';
 import 'package:flutter_project/widget/animation/animation_one_screen.dart';
 import 'package:flutter_project/widget/animation/base_animation_study.dart';
+import 'package:flutter_project/widget/buttons_screen.dart';
 import 'package:flutter_project/widget/calendar/custom_calendar.dart';
 import 'package:flutter_project/widget/custom_text_field.dart';
 import 'package:flutter_project/widget/test_parameter.dart';
@@ -170,6 +171,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       Navigator.of(context).push(CustomClock.route);
                     },
                     child: buttonText("自定义钟表")),
+                ElevatedButton(
+                    onPressed: () async {
+                      Navigator.of(context).push(ButtonsScreen.route);
+                    },
+                    child: buttonText("Buttons")),
                 const CustomMaterialButton(),
                 ElevatedButton(
                     onPressed: () async {

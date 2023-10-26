@@ -14,30 +14,26 @@ import 'package:flutter/services.dart';
 class Assets {
   Assets._();
 
-  static const SvgGenImage inabeBottomTabHome =
-      SvgGenImage('assets/inabe_bottom_tab_home.svg');
-  static const SvgGenImage inabeBottomTabMenu =
-      SvgGenImage('assets/inabe_bottom_tab_menu.svg');
-  static const SvgGenImage inabeBottomTabRecord =
-      SvgGenImage('assets/inabe_bottom_tab_record.svg');
+  static const AssetGenImage examinationCancer = AssetGenImage('assets/examination_cancer.png');
+  static const AssetGenImage examinationNormal = AssetGenImage('assets/examination_normal.png');
+  static const SvgGenImage inabeBottomTabHome = SvgGenImage('assets/inabe_bottom_tab_home.svg');
+  static const SvgGenImage inabeBottomTabMenu = SvgGenImage('assets/inabe_bottom_tab_menu.svg');
+  static const SvgGenImage inabeBottomTabRecord = SvgGenImage('assets/inabe_bottom_tab_record.svg');
   static const SvgGenImage inabeTayorinServerIcon =
       SvgGenImage('assets/inabe_tayorin_server_icon.svg');
-  static const AssetGenImage inabeWelcomeImage =
-      AssetGenImage('assets/inabe_welcome_image.png');
-  static const AssetGenImage menuAccount =
-      AssetGenImage('assets/menu_account.png');
-  static const AssetGenImage menuContact =
-      AssetGenImage('assets/menu_contact.png');
-  static const AssetGenImage menuDeleteAccount =
-      AssetGenImage('assets/menu_delete_account.png');
+  static const AssetGenImage inabeWelcomeImage = AssetGenImage('assets/inabe_welcome_image.png');
+  static const AssetGenImage menuAccount = AssetGenImage('assets/menu_account.png');
+  static const AssetGenImage menuContact = AssetGenImage('assets/menu_contact.png');
+  static const AssetGenImage menuDeleteAccount = AssetGenImage('assets/menu_delete_account.png');
   static const AssetGenImage menuFaq = AssetGenImage('assets/menu_faq.png');
-  static const AssetGenImage menuHowTo =
-      AssetGenImage('assets/menu_how_to.png');
+  static const AssetGenImage menuHowTo = AssetGenImage('assets/menu_how_to.png');
   static const String test = 'assets/test.html';
   static const String touch = 'assets/touch.wav';
 
   /// List of all assets
   List<dynamic> get values => [
+        examinationCancer,
+        examinationNormal,
         inabeBottomTabHome,
         inabeBottomTabMenu,
         inabeBottomTabRecord,
@@ -167,6 +163,7 @@ class SvgGenImage {
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
       theme: theme,
+      colorFilter: colorFilter,
       color: color,
       colorBlendMode: colorBlendMode,
       clipBehavior: clipBehavior,
