@@ -44,8 +44,8 @@ class _CustomWidgetCircleTwoState extends ConsumerState<CustomWidgetCircleTwo> {
                     progressStartColor: const Color(0xFFF6F2AC),
                     progressEndColor: const Color(0xFFEA9425),
                     size: const Size(200, 200),
-                    progressStrokeWidth: 22,
-                    baseStrokeWidth: 22,
+                    progressStrokeWidth: 12,
+                    baseStrokeWidth: 12,
                   ),
                 ),
                 ElevatedButton(

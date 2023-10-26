@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_project/empty_screen/screen_1.dart';
 import 'package:flutter_project/example/clock/custom_clock.dart';
 import 'package:flutter_project/riverpod/future_provider/future_provider_test.dart';
 import 'package:flutter_project/riverpod/hello_riverpod.dart';
@@ -24,6 +25,7 @@ import 'package:intl/intl.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 import 'change_notifier.dart';
+import 'my_route_observer.dart';
 import 'useplugin/fl_chart/fl_bar_chart_example.dart';
 import 'useplugin/fl_chart/fl_bar_chart_example_2.dart';
 import 'useplugin/fl_chart/fl_liner_chart_example.dart';
@@ -58,6 +60,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      navigatorObservers: [MyRouteObserver()],
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -237,6 +240,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     Navigator.of(context).push(FlLineChartExample.route);
                   },
                   child: buttonText("FlLineChartExample"),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    Navigator.of(this.context).push(Screen1.route);
+                  },
+                  child: buttonText("current route name"),
                 ),
               ],
             ),
