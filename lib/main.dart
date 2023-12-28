@@ -11,6 +11,7 @@ import 'package:flutter_project/value_notifier.dart';
 import 'package:flutter_project/widget/animation/animated_builder_study.dart';
 import 'package:flutter_project/widget/animation/animation_one_screen.dart';
 import 'package:flutter_project/widget/animation/base_animation_study.dart';
+import 'package:flutter_project/widget/animation/logo_rotate.dart';
 import 'package:flutter_project/widget/buttons_screen.dart';
 import 'package:flutter_project/widget/calendar/custom_calendar.dart';
 import 'package:flutter_project/widget/custom_text_field.dart';
@@ -258,6 +259,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     Navigator.of(this.context).push(Screen1.route);
                   },
                   child: buttonText("current route name"),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    Navigator.of(this.context).push(LogoRotate.route);
+                  },
+                  child: buttonText("AnimatedRotation"),
                 ),
               ],
             ),
