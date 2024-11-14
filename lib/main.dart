@@ -30,6 +30,7 @@ import 'my_route_observer.dart';
 import 'useplugin/fl_chart/fl_bar_chart_example.dart';
 import 'useplugin/fl_chart/fl_bar_chart_example_2.dart';
 import 'useplugin/fl_chart/fl_liner_chart_example.dart';
+import 'useplugin/fl_chart/fl_liner_chart_sapporo.dart';
 import 'widget/widget/audio_players_test.dart';
 import 'widget/widget/custom_material_button.dart';
 import 'widget/widget/textfield.dart';
@@ -233,6 +234,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     Navigator.of(context).push(FlLineChartExample.route);
                   },
                   child: buttonText("FlLineChartExample"),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    Navigator.of(context).push(FlLineChartSapporo.route);
+                  },
+                  child: buttonText("FlLineChartSapporo"),
                 ),
                 ElevatedButton(
                   onPressed: () async {
