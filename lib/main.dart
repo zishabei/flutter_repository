@@ -1,4 +1,3 @@
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_project/empty_screen/screen_1.dart';
@@ -25,34 +24,26 @@ import 'package:flutter_project/widget/widget/inherited_widget_test.dart';
 import 'package:flutter_project/widget/widget/layout_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 import 'change_notifier.dart';
 import 'my_route_observer.dart';
 import 'useplugin/fl_chart/fl_bar_chart_example.dart';
 import 'useplugin/fl_chart/fl_bar_chart_example_2.dart';
 import 'useplugin/fl_chart/fl_liner_chart_example.dart';
-import 'widget/camera/camera_example_home.dart';
 import 'widget/widget/audio_players_test.dart';
 import 'widget/widget/custom_material_button.dart';
 import 'widget/widget/textfield.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-List<CameraDescription> cameras = <CameraDescription>[];
-
 Future<void> main() async {
   // Fetch the available cameras before initializing the app.
-  try {
-    WidgetsFlutterBinding.ensureInitialized();
-    cameras = await availableCameras();
-    Intl.defaultLocale = 'ja_JP';
-    await initializeDateFormatting("ja_JP");
-  } on CameraException catch (e) {}
+  WidgetsFlutterBinding.ensureInitialized();
+  Intl.defaultLocale = 'ja_JP';
+  await initializeDateFormatting("ja_JP");
   runApp(const ProviderScope(child: MyApp()));
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent),
   );
-  AssetPicker.registerObserve();
 }
 
 class MyApp extends StatelessWidget {
@@ -114,12 +105,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: buttonText("animation one")),
                 ElevatedButton(
                     onPressed: () async {
-                      final List<AssetEntity>? result =
-                          await AssetPicker.pickAssets(context);
-                    },
-                    child: buttonText("选择照片")),
-                ElevatedButton(
-                    onPressed: () async {
                       Navigator.of(context).push(TestParameterScreen.route);
                     },
                     child: buttonText("测试属性")),
@@ -128,11 +113,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       Navigator.of(context).push(CustomTextField.route);
                     },
                     child: buttonText("自定义文本输入框")),
-                ElevatedButton(
-                    onPressed: () async {
-                      Navigator.of(context).push(CameraExampleHome.route);
-                    },
-                    child: buttonText("相机")),
                 ElevatedButton(
                     onPressed: () async {
                       Navigator.of(context).push(MyTextFormView.route);
@@ -278,7 +258,7 @@ class _MyHomePageState extends State<MyHomePage> {
       style: Theme.of(context)
           .textTheme
           .button
-          ?.copyWith(fontSize: 16, color: Colors.white),
+          ?.copyWith(fontSize: 16, color: Colors.black),
     );
   }
 }
